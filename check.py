@@ -1,11 +1,10 @@
 import os
 import requests
 from bs4 import BeautifulSoup
-import random
 import json
 import re
 
-class Fb_reg_or_not():
+class fb_reg_or_not():
 	if not os.path.exists('list_email.txt'): open('list_email.txt', 'w').close()
 	def __init__(self):
 		self.ses = requests.session()
@@ -60,6 +59,7 @@ class Fb_reg_or_not():
 		f.close()
 
 	def run(self):
+		open('success.txt', 'w').close()
 		data = open('list_email.txt', 'r').read()
 		list_email = data.split('\n')
 		list_mail_valid = []
@@ -69,7 +69,7 @@ class Fb_reg_or_not():
 				self.dk()
 				payload = self.get_payload()
 			cout+=1
-			print(f'{cout}|{email}|', end='')
+			print(f'{cout}|{email}', end=' -> ')
 			try:
 				check = self.check_email(payload, email)
 				if check == True:
@@ -85,5 +85,5 @@ class Fb_reg_or_not():
 
 if __name__ == '__main__':
 	print("TOOL CHECK MAIL YAHOO")
-	tool = Fb_reg_or_not()
+	tool = fb_reg_or_not()
 	tool.run()
