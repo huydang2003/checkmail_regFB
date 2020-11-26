@@ -84,5 +84,6 @@ class Fb_reg_or_not():
 		print('Success!!!')
 
 if __name__ == '__main__':
+	print("TOOL CHECK MAIL YAHOO")
 	tool = Fb_reg_or_not()
 	tool.run()

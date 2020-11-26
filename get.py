@@ -27,15 +27,17 @@ class creat_email():
 			check = self.check_yahoo(email)
 			if check==True:
 				cout+=1
-				if cout%5==0: self.save_email(email)
+				self.save_email(email)
 				print(f"{cout}|{email}")
 		
 	def run(self):
 		name_email = input("Name: ")
 		sl = int(input('soluong: '))
+		print('[START]')
 		self.get_list_email(name_email, sl)
 		print('Success!!!')
 
 if __name__ == '__main__':
+	print("TOOL GET MAIL YAHOO")
 	tool = creat_email()
 	tool.run()
