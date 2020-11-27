@@ -10,18 +10,29 @@ class creat_email():
 		f.write(email+'\n')
 		f.close()
 
+	# def check_yahoo(self, email):
+	# 	url = 'https://mmo69.com/_check_live_email/api.php?email='+email
+	# 	res = self.ses.get(url)
+	# 	data = res.text
+	# 	kq = data.split('|')
+	# 	if kq[2] == 'DIE': return True
+	# 	else: return False
+
 	def check_yahoo(self, email):
-		url = 'https://mmo69.com/_check_live_email/api.php?email='+email
-		res = self.ses.get(url)
-		data = res.text
-		kq = data.split('|')
-		if kq[2] == 'DIE': return True
-		else: return False
+		url = "https://ssfy.sh/amaurymartiny/reacher@2d2ce35c/check_email"
+		payload = {"to_email": email}
+		res = self.ses.post(url, json=payload)
+		data = res.json()
+		print(data)
+		if 'is_reachable' in data:
+			gt = data['is_reachable']
+			if gt == 'invalid': return True
+			else: return False
 
 	def get_list_email(self, name_email, sl):
 		open('list_email.txt', 'w').close()
 		cout = 0
-		while cout <= sl:
+		while cout < sl:
 			num = random.randint(1, 999)
 			email = f'{name_email}{num}@yahoo.com'
 			check = self.check_yahoo(email)
@@ -41,3 +52,6 @@ if __name__ == '__main__':
 	print("TOOL GET MAIL YAHOO")
 	tool = creat_email()
 	tool.run()
+	# email = "nguyenhung3085@yahoo.com"
+	# check = tool.check_yahoo(email)
+	# print(check)
