@@ -10,7 +10,8 @@ class check_mail():
 		self.ses = requests.session()
 		self.list_ip = []
 		self.list_mail_valid = []
-		self.cout = 0
+		self.list_mail_old = []
+		self.cout = 1
 
 	def save_email(self, email):
 		f = open('success.txt', 'a')
@@ -43,7 +44,6 @@ class check_mail():
 		payload = {"to_email": email}
 		res = self.ses.post(url, json=payload)
 		data = res.json()
-		# print(data)
 		if 'is_reachable' in data:
 			gt = data['is_reachable']
 			if gt == 'invalid': return 1
@@ -76,14 +76,16 @@ class check_mail():
 	def process(self, name_email, sl):
 		self.dk()
 		payload = self.get_payload()
-		while self.cout < sl:
+		while self.cout <= sl:
 			num = randint(1, 999)
 			email = f'{name_email}{num}@yahoo.com'
+			if email in self.list_mail_old: continue
+			print('-')
+			self.list_mail_old.append(email)
+
 			check = self.check_mail(email)
 			if check == 0: continue
-			elif check == 2:
-				self.dk()
-				# payload = self.get_payload()
+			elif check == 2: self.dk()
 			elif check == 1:
 				print(f'{self.cout}|{email}', end=' +> ')
 				try:
