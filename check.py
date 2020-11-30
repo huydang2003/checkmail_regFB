@@ -65,6 +65,7 @@ class fb_reg_or_not():
 		list_mail_valid = []
 		cout = 0
 		for email in list_email:
+			if email=='': continue
 			if cout % 80 == 0:
 				self.dk()
 				payload = self.get_payload()

@@ -21,15 +21,7 @@ class creat_email():
 			return check
 		except:
 			return ''
-
-	# def check_yahoo(self, email):
-	# 	url = 'https://mmo69.com/_check_live_email/api.php?email='+email
-	# 	res = self.ses.get(url)
-	# 	data = res.text
-	# 	kq = data.split('|')
-	# 	if kq[2] == 'DIE': return True
-	# 	else: return False
-
+			
 	def check_mail(self, email):
 		url = "https://ssfy.sh/amaurymartiny/reacher@2d2ce35c/check_email"
 		payload = {"to_email": email}
@@ -40,6 +32,14 @@ class creat_email():
 			if gt == 'invalid': return 1
 			else: return 0
 		else: return 2
+	
+	def check_yahoo(self, email):
+		url = 'https://mmo69.com/_check_live_email/api.php?email='+email
+		res = self.ses.get(url)
+		data = res.text
+		kq = data.split('|')
+		if kq[2] == 'DIE': return 1
+		else: return 0      
 
 	def dk(self):
 		while True:
@@ -55,20 +55,21 @@ class creat_email():
 					print('\nip chưa thay đổi!!!')
 			input('Change ip!!!(Enter)')
 
-	def process(self, name_email, sl):
-		self.dk()
+	def process(self, service_email, name_email, sl):
+		#self.dk()
 		while self.cout <= sl:
 			num = randint(1, 999)
-			email = f'{name_email}{num}@yahoo.com'
+			email = f'{name_email}{num}@{service_email}.com'
 			if email in self.list_mail_old: continue
-			print('-')
 			self.list_mail_old.append(email)
-
-			check = self.check_mail(email)
-			if check == 0: continue
+			#check = self.check_mail(email)
+			check = self.check_yahoo(email)
+			if check == 0:
+				print('-')
+				continue
 			elif check == 2: self.dk()
 			elif check == 1:
-				print(f'{self.cout}|{email}', end=' +> ')	
+				print(f'{self.cout}|{email}')	
 				self.cout+=1			
 				self.save_email(email)
 		
@@ -76,14 +77,13 @@ class creat_email():
 		open('list_email.txt', 'w').close()
 		name_email = input("Name: ")
 		sl = int(input('soluong: '))
+		service_email = 'yahoo'
+		#service_email = 'hotmail'
 		print('[START]')
-		self.process(name_email, sl)
+		self.process(service_email, name_email, sl)
 		print('Success!!!')
 
 if __name__ == '__main__':
 	print("TOOL GET MAIL YAHOO")
 	tool = creat_email()
 	tool.run()
-	# email = "nguyenhung3085@yahoo.com"
-	# check = tool.check_yahoo(email)
-	# print(check)
