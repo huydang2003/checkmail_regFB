@@ -43,7 +43,7 @@ class creat_email():
 
 	def dk(self):
 		while True:
-			print('\nChecking ip...')
+			print('Checking ip...')
 			ip = self.check_ip()
 			if ip == '': print('ip đểu rồi!!!')
 			else:
@@ -56,14 +56,14 @@ class creat_email():
 			input('Change ip!!!(Enter)')
 
 	def process(self, service_email, name_email, sl):
-		#self.dk()
+		self.dk()
 		while self.cout <= sl:
 			num = randint(1, 999)
 			email = f'{name_email}{num}@{service_email}.com'
 			if email in self.list_mail_old: continue
 			self.list_mail_old.append(email)
-			#check = self.check_mail(email)
-			check = self.check_yahoo(email)
+			check = self.check_mail(email)
+			# check = self.check_yahoo(email)
 			if check == 0:
 				print('-')
 				continue
