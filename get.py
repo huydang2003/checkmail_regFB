@@ -68,7 +68,7 @@ class creat_email():
 			if check == 0: continue
 			elif check == 2: self.dk()
 			elif check == 1:
-				print(f'{self.cout}|{email}', end=' +> ')	
+				print(f'{self.cout}|{email}')	
 				self.cout+=1			
 				self.save_email(email)
 		
@@ -84,6 +84,3 @@ if __name__ == '__main__':
 	print("TOOL GET MAIL YAHOO")
 	tool = creat_email()
 	tool.run()
-	# email = "nguyenhung3085@yahoo.com"
-	# check = tool.check_yahoo(email)
-	# print(check)
